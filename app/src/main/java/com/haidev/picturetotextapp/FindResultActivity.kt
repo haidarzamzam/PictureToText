@@ -7,7 +7,6 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -18,19 +17,18 @@ import com.bumptech.glide.Glide
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-import com.haidev.picturetotextapp.databinding.ActivityMainBinding
+import com.haidev.picturetotextapp.databinding.ActivityFindResultBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class FindResultActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFindResultBinding
     private lateinit var scannedBitmap: Bitmap
     private var bitmapState: Bitmap? = null
     private lateinit var textResult: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityFindResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -64,6 +62,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             pictureDialog.show()
+        }
+
+        binding.btnEditResult.setOnClickListener {
+            val intent = Intent(this, EditResultActivity::class.java)
+            intent.putExtra("textResult", textResult)
+            launcherIntentEditResult.launch(intent)
+        }
+    }
+
+    private val launcherIntentEditResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == RESULT_OK) {
+            textResult = it.data?.extras?.get("textResult").toString()
+            binding.tvResultCaptured.text = textResult
         }
     }
 
