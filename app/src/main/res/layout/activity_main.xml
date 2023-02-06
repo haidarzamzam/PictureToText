@@ -49,26 +49,66 @@
         android:layout_marginHorizontal="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_normal"
+        android:text="-"
         android:textColor="@color/text_color_secondary"
-        app:layout_constraintBottom_toTopOf="@id/btn_take_picture"
+        app:layout_constraintBottom_toTopOf="@id/ll_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_result_captured"
-        tools:text="@string/lorem_ipsum" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title_result_captured" />
 
-    <Button
-        android:id="@+id/btn_take_picture"
+    <LinearLayout
+        android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_normal"
-        android:layout_marginBottom="@dimen/margin_normal"
-        android:background="@drawable/bg_button_primary"
-        android:stateListAnimator="@null"
-        android:text="@string/take_the_picture"
-        android:textAllCaps="false"
-        app:backgroundTint="@null"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_edit_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:background="@drawable/bg_button_outlined"
+            android:padding="@dimen/margin_small"
+            android:src="@drawable/ic_edit_24"
+            android:textColor="@color/primary_color"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title_result_captured"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title_result_captured"
+            app:tint="@color/primary_color" />
+
+        <Button
+            android:id="@+id/btn_take_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_outlined"
+            android:stateListAnimator="@null"
+            android:text="@string/take_picture"
+            android:textAllCaps="false"
+            android:textColor="@color/primary_color"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/btn_upload_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_primary"
+            android:stateListAnimator="@null"
+            android:text="@string/upload_result"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

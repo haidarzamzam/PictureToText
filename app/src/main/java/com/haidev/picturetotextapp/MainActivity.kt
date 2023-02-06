@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -79,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             scannedBitmap = bitmap
             bitmapState = bitmap
             Glide.with(this).load(bitmap).into(binding.ivCaptured)
+            detectText(scannedBitmap)
         }
     }
 
@@ -115,10 +117,21 @@ class MainActivity : AppCompatActivity() {
                 binding.tvResultCaptured.text = it.text
                 textResult = it.text
                 Toast.makeText(this, "Success detect text", Toast.LENGTH_SHORT).show()
+
+                if (it.text == "") {
+                    binding.btnEditResult.visibility = View.GONE
+                    binding.btnUploadResult.visibility = View.GONE
+                    binding.tvResultCaptured.text = "-"
+                } else {
+                    binding.btnEditResult.visibility = View.VISIBLE
+                    binding.btnUploadResult.visibility = View.VISIBLE
+                }
             }
             .addOnFailureListener { e ->
                 e.printStackTrace()
                 Toast.makeText(this, "Failed detect text", Toast.LENGTH_SHORT).show()
+                binding.btnEditResult.visibility = View.GONE
+                binding.btnUploadResult.visibility = View.GONE
             }
     }
 
