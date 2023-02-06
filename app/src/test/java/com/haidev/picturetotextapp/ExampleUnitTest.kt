@@ -1,4 +1,4 @@
-package com.example.picturetotextapp
+package com.haidev.picturetotextapp
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
