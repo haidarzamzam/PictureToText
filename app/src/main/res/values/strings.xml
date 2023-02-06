@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PictureToTextApp</string>
+    <string name="result_text_from_picture">Result Text From Picture :</string>
+    <string name="take_the_picture">Take the Picture</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis egestas elit. Morbi convallis orci at nisi fermentum condimentum. Pellentesque ut ex urna. Aliquam maximus aliquam quam, id pulvinar erat sollicitudin vitae. Praesent ac malesuada dolor. Morbi a laoreet augue. Mauris velit risus, suscipit in finibus a, sollicitudin quis turpis. Maecenas ut lorem vel nisl faucibus congue aliquet ut magna. Maecenas sollicitudin, neque in placerat porta, est massa scelerisque urna, eu vehicula velit purus at libero. Ut sed leo ac nisi dapibus sagittis et sed mauris. Phasellus ut erat vitae metus hendrerit accumsan at ac velit. Fusce sed augue pharetra, mattis sapien a, mattis dolor. Vestibulum est lectus, venenatis ut magna eget, rhoncus varius nisi.</string>
 </resources>
