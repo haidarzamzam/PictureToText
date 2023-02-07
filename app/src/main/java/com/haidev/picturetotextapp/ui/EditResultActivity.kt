@@ -1,4 +1,4 @@
-package com.haidev.picturetotextapp
+package com.haidev.picturetotextapp.ui
 
 import android.app.Activity
 import android.content.Intent

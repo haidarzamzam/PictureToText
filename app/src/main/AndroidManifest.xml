@@ -14,10 +14,10 @@
         android:theme="@style/Theme.PictureToTextApp"
         tools:targetApi="31">
         <activity
-            android:name=".EditResultActivity"
+            android:name=".ui.EditResultActivity"
             android:exported="false" />
         <activity
-            android:name=".FindResultActivity"
+            android:name=".ui.FindResultActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.haidev.picturetotextapp
+package com.haidev.picturetotextapp.ui
 
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
@@ -14,16 +14,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.haidev.picturetotextapp.databinding.ActivityFindResultBinding
+import com.haidev.picturetotextapp.model.ItemModel
 
 class FindResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindResultBinding
     private lateinit var scannedBitmap: Bitmap
     private var bitmapState: Bitmap? = null
     private lateinit var textResult: String
+
+    private lateinit var dbFirebase: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +74,26 @@ class FindResultActivity : AppCompatActivity() {
             val intent = Intent(this, EditResultActivity::class.java)
             intent.putExtra("textResult", textResult)
             launcherIntentEditResult.launch(intent)
+        }
+
+        binding.btnUploadResult.setOnClickListener {
+            FirebaseApp.initializeApp(this)
+            dbFirebase = FirebaseDatabase.getInstance("https://picturetotext-955e9-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("items")
+
+            val item = ItemModel(textResult)
+
+            val databaseReference = FirebaseDatabase.getInstance("https://picturetotext-955e9-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+            val id = databaseReference.push().key
+            dbFirebase.child(id.toString()).setValue(item).addOnCanceledListener {
+                Toast.makeText(this, "Success upload data to Firebase", Toast.LENGTH_SHORT).show()
+
+                textResult = ""
+                binding.tvResultCaptured.text = textResult
+                binding.btnEditResult.visibility = View.GONE
+                binding.btnUploadResult.visibility = View.GONE
+            }.addOnFailureListener {
+                Toast.makeText(this, "Failed upload data to Firebase", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
