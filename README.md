@@ -7,7 +7,7 @@ This application is an application to view statistic of corona. and the feature 
 
 ## 💡 Stack & Libraries
 
-- Minimum SDK level 21
+- Minimum SDK level 24
 - [Kotlin](https://kotlinlang.org/) based.
 - [ML Kit](https://developers.google.com/ml-kit/vision/text-recognition/android) - text recognition.
 - [Firebase Database](https://firebase.google.com/docs/database/android/start) - database.
